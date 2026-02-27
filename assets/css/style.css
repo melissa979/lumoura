@@ -2375,3 +2375,17 @@ ul {
         grid-template-columns: 1fr;
     }
 }
+.btn-buy-now {
+    background: #D4AF37 !important; /* or gold */
+    color: black !important;
+    border: none !important;
+    padding: 14px 30px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    transition: all 0.3s !important;
+}
+
+.btn-buy-now:hover {
+    background: #b89778 !important;
+    transform: scale(1.05) !important;
+}

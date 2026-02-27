@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($pageTitle) ? $pageTitle . ' - ' : ''; ?>Lumoura - Joaillerie de Luxe</title>
     
-    <!-- Font Awesome pour les icônes (déjà là, on garde) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts - Polices élégantes (déjà là, on garde) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap 5 CSS – on l'ajoute ici -->
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
-    <!-- Bootstrap Icons (très utile pour panier, cœur, loupe, etc.) -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
-    <!-- TON CSS principal – DOIT venir APRÈS Bootstrap pour garder la priorité -->
+    <!-- Ton CSS principal -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
     
     <!-- Favicon -->
@@ -26,97 +26,83 @@
 <body>
 
     <!-- Navigation principale -->
-    <nav class="navbar" id="mainNavbar">
-        <div class="nav-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
             <!-- Logo -->
-            <a href="<?php echo SITE_URL; ?>index.php" class="nav-logo" style="margin-right: 100px;">
-                <span class="logo-text">Eclat D'or</span>
-                <span class="logo-subtext">Parfums d'Exception</span>
+            <a class="navbar-brand fw-bold text-dark" href="<?php echo SITE_URL; ?>index.php">
+                <span class="logo-text">ECLAT D'OR</span>
+                <small class="d-block text-muted fs-6"></small>
             </a>
 
-            <!-- Menu pour mobile -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+            <!-- Bouton mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation desktop -->
-            <div class="nav-menu" id="navMenu">
-                <a href="<?php echo SITE_URL; ?>index.php" class="nav-link"><i class="fas fa-home"></i> Accueil</a>
-                <a href="<?php echo SITE_URL; ?>pages/catalogue.php" class="nav-link"><i class="fas fa-store"></i> Catalogue</a>
-                <a href="<?php echo SITE_URL; ?>pages/catalogue.php?category=femme" class="nav-link">Femme</a>
-                <a href="<?php echo SITE_URL; ?>pages/catalogue.php?category=homme" class="nav-link">Homme</a>
-                <a href="<?php echo SITE_URL; ?>pages/catalogue.php?category=unisexe" class="nav-link">Unisexe</a>
-                
-                <!-- Menu déroulant Nouveautés -->
-                <div class="nav-dropdown">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-star"></i> Collections <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="<?php echo SITE_URL; ?>pages/catalogue.php?filter=new">Nouveautés</a>
-                        <a href="<?php echo SITE_URL; ?>pages/catalogue.php?filter=bestseller">Best-sellers</a>
-                        <a href="<?php echo SITE_URL; ?>pages/catalogue.php?filter=promo">Promotions</a>
-                        <a href="<?php echo SITE_URL; ?>pages/catalogue.php?concentration=Parfum">Parfums Signature</a>
-                    </div>
-                </div>
-                
-                <a href="#" class="nav-link"><i class="fas fa-gift"></i> Cadeaux</a>
-            </div>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>index.php">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>pages/catalogue.php">Catalogue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>pages/catalogue.php?category=Femme">Femme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>pages/catalogue.php?category=Homme">Homme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>pages/catalogue.php?category=Unisexe">Unisexe</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="collectionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Collections
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
+                            <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>pages/catalogue.php?filter=new">Nouveautés</a></li>
+                            <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>pages/catalogue.php?filter=bestseller">Best-sellers</a></li>
+                            <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>pages/catalogue.php?filter=promo">Promotions</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>pages/cadeaux.php">Cadeaux</a>
+                    </li>
+                </ul>
 
-            <!-- Actions utilisateur -->
-            <div class="nav-actions">
-                <!-- Recherche -->
-                <div class="search-container">
-                    <button class="search-btn" id="searchToggle">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <div class="search-box" id="searchBox">
-                        <input type="text" placeholder="Rechercher un parfum..." id="searchInput">
-                        <button class="search-submit"><i class="fas fa-search"></i></button>
+                <!-- Barre de recherche + actions -->
+                <div class="d-flex align-items-center ms-4">
+                    <!-- Recherche -->
+                    <form method="GET" action="<?php echo SITE_URL; ?>pages/recherche.php" class="d-flex me-3">
+                        <div class="input-group" style="width: 280px;">
+                            <input type="text" name="q" class="form-control rounded-pill border-0 bg-light" placeholder="Rechercher un bijou, bague, collier..." aria-label="Rechercher">
+                            <button class="btn btn-outline-secondary rounded-pill ms-2" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Icônes utilisateur et panier -->
+                    <div class="d-flex align-items-center">
+                        <a href="<?php echo SITE_URL; ?>pages/compte.php" class="text-dark me-3">
+                            <i class="fas fa-user fs-5"></i>
+                        </a>
+                        <a href="<?php echo SITE_URL; ?>pages/panier.php" class="text-dark position-relative">
+                            <i class="fas fa-shopping-bag fs-5"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
+                            </span>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Compte utilisateur -->
-                <div class="user-dropdown">
-                    <button class="user-btn">
-                        <i class="fas fa-user"></i>
-                    </button>
-                    <div class="user-dropdown-content">
-                        <?php if (isset($_SESSION['user_id'])): ?>
-                            <a href="<?php echo SITE_URL; ?>pages/compte.php"><i class="fas fa-user-circle"></i> Mon Compte</a>
-                            <a href="<?php echo SITE_URL; ?>pages/compte.php?page=orders"><i class="fas fa-shopping-bag"></i> Mes Commandes</a>
-                            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
-                                <a href="<?php echo SITE_URL; ?>pages/admin/"><i class="fas fa-cog"></i> Administration</a>
-                            <?php endif; ?>
-                            <hr>
-                            <a href="<?php echo SITE_URL; ?>pages/deconnexion.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-                        <?php else: ?>
-                            <a href="<?php echo SITE_URL; ?>pages/connexion.php"><i class="fas fa-sign-in-alt"></i> Connexion</a>
-                            <a href="<?php echo SITE_URL; ?>pages/inscription.php"><i class="fas fa-user-plus"></i> Inscription</a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                
-                <!-- Panier -->
-                <a href="<?php echo SITE_URL; ?>pages/panier.php" class="cart-btn" id="cartBtn">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count" id="cartCount">
-                        <?php
-                        // Affiche le nombre d'articles dans le panier
-                        $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
-                        echo $cartCount > 0 ? $cartCount : '0';
-                        ?>
-                    </span>
-                </a>
             </div>
-        </div>
-        
-        <!-- Barre de recherche mobile -->
-        <div class="mobile-search" id="mobileSearch">
-            <input type="text" placeholder="Rechercher un parfum...">
-            <button><i class="fas fa-search"></i></button>
         </div>
     </nav>
+
+    <!-- Espace pour que le contenu ne soit pas caché sous la navbar fixe -->
+    <div style="height: 80px;"></div>
 
     <!-- Contenu principal -->
     <main class="main-content">

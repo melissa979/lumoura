@@ -1,136 +1,93 @@
 <?php
-/**
- * Page de déconnexion - Lumoura Joaillerie
- * 
- * Cette page :
- * - détruit la session de l'utilisateur
- * - supprime le cookie de session si présent
- * - affiche un message de confirmation pendant 2-3 secondes
- * - redirige ensuite automatiquement vers la page d'accueil
- */
-
 session_start();
 
-// === 1. Nettoyage complet de la session ===
-
-// On vide toutes les variables de session
 $_SESSION = [];
 
-// Si un cookie de session existe, on le supprime aussi (sécurité renforcée)
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
-    setcookie(
-        session_name(),               // nom du cookie de session (souvent PHPSESSID)
-        '',                           // valeur vide
-        time() - 42000,               // expiration dans le passé
-        $params["path"],
-        $params["domain"],
-        $params["secure"],
-        $params["httponly"]
-    );
+    setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 }
 
-// === 2. Destruction définitive de la session ===
 session_destroy();
-
-// === 3. Message de confirmation (optionnel mais plus élégant) ===
-$message = "Déconnexion réussie. À très bientôt chez Lumoura 💎";
-$redirect_url = "../index.php";  // ← change ici si tu veux rediriger ailleurs (ex: catalogue.php)
-$delay_seconds = 2;              // temps avant redirection automatique
-
 ?>
-<!-- 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Déconnexion - Lumoura Joaillerie</title>
-    
-     Redirection automatique après X secondes 
-    <meta http-equiv="refresh" content="<?php echo $delay_seconds; ?>;url=<?php echo $redirect_url; ?>">
-    
+    <meta http-equiv="refresh" content="2;url=../index.php">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Didact+Gothic&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #fdfaf5 0%, #f8f3e8 100%);
-            color: #333;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+        :root{--g1:#D4A843;--g2:#F5D78E;--ink:#0D0A06;--smoke:#F8F5EF;--stone:#E8E0D0;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:'Didact Gothic',sans-serif;
+            background:var(--ink);
+            height:100vh;
+            display:flex;align-items:center;justify-content:center;
+            text-align:center;
+            position:relative;overflow:hidden;
         }
-        .logout-container {
-            max-width: 500px;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
-            border: 1px solid rgba(212, 175, 55, 0.12); /* touche or discrète */
+        body::before{
+            content:'';position:absolute;inset:0;
+            background:radial-gradient(ellipse at center, rgba(212,168,67,.12) 0%, transparent 70%);
         }
-        h1 {
-            color: #8b6f47;           /* brun/or élégant */
-            margin-bottom: 20px;
-            font-size: 1.8rem;
+        .logout-box{
+            position:relative;z-index:1;
+            max-width:460px;width:90%;
+            background:rgba(255,255,255,.04);
+            border:1px solid rgba(212,168,67,.2);
+            padding:60px 50px;
         }
-        .message {
-            font-size: 1.15rem;
-            color: #555;
-            margin-bottom: 25px;
-            line-height: 1.6;
+        .gem{
+            font-size:3rem;margin-bottom:24px;
+            animation:pulse 2s ease-in-out infinite;
+            display:block;
         }
-        .gem-icon {
-            font-size: 3.5rem;
-            color: #d4af37;           /* or */
-            margin-bottom: 20px;
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+        h1{
+            font-family:'EB Garamond',serif;
+            font-size:2rem;color:#fff;font-weight:400;
+            margin-bottom:14px;letter-spacing:1px;
         }
-        .redirect-info {
-            font-size: 0.95rem;
-            color: #777;
+        p{color:rgba(255,255,255,.45);font-size:.88rem;line-height:1.7;margin-bottom:8px;}
+        .redirect-info{
+            font-family:'Cinzel',serif;font-size:.55rem;
+            letter-spacing:2.5px;text-transform:uppercase;
+            color:var(--g1);margin:20px 0;
         }
-        .btn-home {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 12px 30px;
-            background: #d4af37;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s;
+        .progress{
+            width:100%;height:2px;background:rgba(255,255,255,.08);
+            margin:16px 0 28px;overflow:hidden;
         }
-        .btn-home:hover {
-            background: #b8972e;
-            transform: translateY(-2px);
+        .progress-fill{
+            height:100%;background:var(--g1);width:0%;
+            animation:fill 2s linear forwards;
         }
+        @keyframes fill{from{width:0%;}to{width:100%;}}
+        .btn-home{
+            display:inline-block;
+            background:var(--g1);color:var(--ink);
+            padding:13px 32px;
+            font-family:'Cinzel',serif;font-size:.62rem;
+            letter-spacing:2.5px;text-transform:uppercase;
+            text-decoration:none;transition:background .3s;
+        }
+        .btn-home:hover{background:var(--g2);}
     </style>
 </head>
 <body>
-
-    <div class="logout-container">
-        <div class="gem-icon">💎</div>
-        <h1>Déconnexion réussie</h1>
-        <p class="message">
-            <?php echo htmlspecialchars($message); ?> <br>
-            Vous avez été déconnecté de votre espace client.
-        </p>
-        <p class="redirect-info">
-            Redirection automatique dans <?php echo $delay_seconds; ?> secondes...
-        </p>
-        <a href="<?php echo $redirect_url; ?>" class="btn-home">
-            Retour à l'accueil maintenant
-        </a>
+    <div class="logout-box">
+        <span class="gem">💎</span>
+        <h1>À bientôt !</h1>
+        <p>Vous avez été déconnecté de votre espace client.<br>Merci pour votre visite chez Lumoura.</p>
+        <div class="redirect-info">Redirection automatique dans 2 secondes...</div>
+        <div class="progress"><div class="progress-fill"></div></div>
+        <a href="../index.php" class="btn-home">Retour à l'accueil</a>
     </div>
-
-    Petit script de secours si le meta refresh ne fonctionne pas 
     <script>
-        setTimeout(() => {
-            window.location.href = "<?php echo addslashes($redirect_url); ?>";
-        }, <?php echo $delay_seconds * 1000; ?>);
+        setTimeout(() => { window.location.href = "../index.php"; }, 2000);
     </script>
-
 </body>
-</html> -->
+</html>
