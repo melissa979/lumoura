@@ -616,7 +616,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const loader = document.createElement('div');
         loader.className = 'page-loader';
         loader.innerHTML = `
-            <div class="loader-logo">LUMOURA</div>
+            <div class="loader-logo">ÉCLAT D'OR</div>
             <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
         `;
         document.body.prepend(loader);
